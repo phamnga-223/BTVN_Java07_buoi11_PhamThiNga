@@ -1,6 +1,5 @@
 package cau3;
 
-import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -15,7 +14,7 @@ public abstract class NhanVien {
 	private Scanner scanner;
 	
 	private String hoTen;
-	private Date ngaySinh;
+	private String ngaySinh;
 	
 	public Scanner getScanner() {
 		return scanner;
@@ -40,10 +39,11 @@ public abstract class NhanVien {
 			} while (this.hoTen.strip().equals(""));
 			
 			//Nhập ngaySinh
-			System.out.print("Ngày sinh: ");
-			String input = this.scanner.next("$[1 31]\\/[1 12]\\/[1 2023]^");
-			System.out.println(input);
-			this.ngaySinh = new Date();
+			String pattern = ("^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[012])-((19|2[0-9])[0-9]{2})$");
+			do {
+				System.out.print("Ngày sinh (DD-MM-YYYY): ");
+				this.ngaySinh = this.scanner.nextLine();
+			} while (!this.ngaySinh.matches(pattern));
 		} catch (Exception ex) {
 			System.out.println("Đã có lỗi xảy ra!");
 			ex.printStackTrace();
